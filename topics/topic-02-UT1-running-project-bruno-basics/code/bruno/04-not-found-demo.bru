@@ -1,0 +1,31 @@
+meta {
+  name: 04 - Not Found (404 demo)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/does-not-exist
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+}
+
+docs {
+  # Not Found (404 demo)
+
+  This route does not exist in the demo backend. Express's default handler
+  answers with HTTP 404 and an HTML body — there is no custom error handling
+  in the demo this week.
+
+  Curl equivalent:
+
+  ```
+  curl -sS -i http://localhost:3000/does-not-exist
+  ```
+
+  Expected: HTTP 404, body containing `Cannot GET /does-not-exist`.
+}

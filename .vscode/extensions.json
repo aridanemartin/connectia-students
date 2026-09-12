@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "bierner.markdown-preview-github-styles",
+    "bierner.markdown-mermaid",
+    "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+    "vstirbu.vscode-mermaid-preview"
+  ]
+}

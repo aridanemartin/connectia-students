@@ -1,0 +1,32 @@
+meta {
+  name: 03 - Hello (with name)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/hello?name=Ada
+  body: none
+  auth: none
+}
+
+params:query {
+  name: Ada
+}
+
+assert {
+  res.status: eq 200
+}
+
+docs {
+  # Hello (with name)
+
+  Curl equivalent:
+
+  ```
+  curl -sS -i "http://localhost:3000/hello?name=Ada"
+  ```
+
+  Expected: HTTP 200, JSON body `{"message":"Hola, Ada!"}`. Try changing the
+  `name` value in the "Params" tab and re-sending the request.
+}

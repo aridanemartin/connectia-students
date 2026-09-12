@@ -1,0 +1,12 @@
+# Dependencies
+**/node_modules/
+
+# Build output
+**/dist/
+
+# Environment files (never commit real values; .env.example is tracked)
+.env
+*.log
+
+# OS / editor
+.DS_Store
