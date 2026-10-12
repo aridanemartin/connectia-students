@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     participant B as Bruno / curl (cliente HTTP)
     participant S as Demo backend (Express, puerto 3000)
@@ -10,3 +11,4 @@ sequenceDiagram
 
     B->>S: GET /does-not-exist
     S-->>B: 404 Not Found  (ruta no definida — manejador por defecto de Express)
+```

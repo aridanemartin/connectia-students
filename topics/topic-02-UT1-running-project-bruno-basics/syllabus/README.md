@@ -1,4 +1,4 @@
-# Semana 02 — Syllabus
+# Topic 02 — Syllabus
 
 - Ubicar un proyecto Node.js, leer su `package.json` y ejecutar sus scripts (`install`, `dev`, `build`).
 - Diferencia entre `.env` (no versionado) y `.env.example` (versionado).

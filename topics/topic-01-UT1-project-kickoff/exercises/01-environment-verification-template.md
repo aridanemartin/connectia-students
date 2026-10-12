@@ -48,8 +48,8 @@ usa `&&` con la misma semántica). La plantilla admite ambas variantes.
 
 | Herramienta | Mínimo | Recomendado | Por qué |
 |-------------|--------|-------------|---------|
-| Node.js | v20.19.0 | v22 LTS | El backend de la Semana 03 exige Node 20.19+ (`process.loadEnvFile()`, ESLint) |
-| Git | 2.0.0 | 2.42+ | El flujo de PR y ramas de la Semana 01 funciona con Git ≥ 2 |
+| Node.js | v20.19.0 | v22 LTS | El backend de la Topic 03 exige Node 20.19+ (`process.loadEnvFile()`, ESLint) |
+| Git | 2.0.0 | 2.42+ | El flujo de PR y ramas de la Topic 01 funciona con Git ≥ 2 |
 
 Lectura de la salida: si tu Node imprime `v16.x`, es **insuficiente**. Si
 imprime `v20.19.0` o `v22.12.0`, **cumples**. Si Git imprime `git version

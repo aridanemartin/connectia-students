@@ -2,7 +2,7 @@
 
 ## Para qué sirve esta actividad
 
-Toda respuesta HTTP tiene tres partes que vais a leer **todas las semanas**
+Toda respuesta HTTP tiene tres partes que vais a leer **todas los topics**
 del curso: el **código de estado**, las **cabeceras** y el **cuerpo**. Esta
 actividad practica identificar las tres partes usando la petición más
 simple de la colección: `GET /health`, que siempre responde `200 OK`

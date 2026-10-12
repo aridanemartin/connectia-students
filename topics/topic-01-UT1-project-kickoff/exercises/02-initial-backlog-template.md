@@ -1,10 +1,10 @@
-# Backlog inicial del equipo — Semana 01
+# Backlog inicial del equipo — Topic 01
 
 > Plantilla para la Actividad 2. Copia este fichero a tu repositorio de equipo
 > como `team-docs/team-backlog.md`. Rellena una fila por ejercicio de la
-> semana con su descripción breve y **qué ha hecho cada miembro**.
+> topic con su descripción breve y **qué ha hecho cada miembro**.
 >
-> Ejercicios de la Semana 01: `00` preparación del editor, `01` verificación
+> Ejercicios de la Topic 01: `00` preparación del editor, `01` verificación
 > del entorno, `02` roster del equipo, `03` flujo Git, `04` diagrama de
 > contexto y `05` este backlog.
 
@@ -12,9 +12,9 @@
 
 El backlog es la **lista de trabajo del curso** en un equipo de trabajo real el backlog es un pilar fundamental para el éxito del proyecto. Cada vez que completemos un ejercicio, lo añadimos al backlog y asignamos responsabilidades. Sirve para dejar
 constancia de dónde queda el trabajo y quién lo ha hecho, y para que el
-profesorado y el equipo tengan una foto clara de como va el equipo cada semana.
+profesorado y el equipo tengan una foto clara de como va el equipo cada topic.
 
-## Backlog — Semana 01
+## Backlog — Topic 01
 
 | topic | ejercicio | descripción del ejercicio | responsabilidades (qué ha hecho cada miembro) |
 |----------|-----------|---------------------------|-----------------------------------------------|
@@ -23,5 +23,5 @@ profesorado y el equipo tengan una foto clara de como va el equipo cada semana.
 | topic-02 | 01 | Backlog inicial del equipo (este registro): ejercicios y responsabilidades. | `*nombre*` abrió la PR. `*nombre*` verificó que todo ejercicio tiene responsables. |
 | topic-01 | *…* | *…* | *…* |
 
-*Añade una fila por cada ejercicio de la semana y rellena con los nombres de
+*Añade una fila por cada ejercicio del topic y rellena con los nombres de
 quien lo ha hecho.*

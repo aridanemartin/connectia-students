@@ -25,7 +25,7 @@ curl -sS -i "http://localhost:3000/hello?name=Ada"
   shell.
 
 Por defecto, `curl` hace una petición `GET`. Para otros métodos (`POST`,
-`PUT`...) se añade `-X MÉTODO`, pero esta semana solo trabajamos con `GET`.
+`PUT`...) se añade `-X MÉTODO`, pero este topic solo trabajamos con `GET`.
 
 ## Tabla de equivalencias
 

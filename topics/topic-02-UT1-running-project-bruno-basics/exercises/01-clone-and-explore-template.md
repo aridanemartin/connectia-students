@@ -1,12 +1,12 @@
 # Clonar y explorar el proyecto — Actividad 1
 
 > Plantilla para la Actividad 1. Copia este fichero a tu repositorio de equipo
-> como `team-docs/week-02/01-clone-and-explore.md` y rellena
+> como `team-docs/topic-02/01-clone-and-explore.md` y rellena
 > cada sección.
 
 ## Para qué sirve esta actividad
 
-Esta semana **no escribís backend**: ejecutáis y probáis uno que ya existe
+Este topic **no escribís backend**: ejecutáis y probáis uno que ya existe
 en `topics/topic-02-UT1-running-project-bruno-basics/code/backend/`. El
 primer paso de cualquier trabajo con un proyecto ajeno es siempre el mismo:
 clonarlo, o abrir la carpeta dentro de la copia local del repositorio del

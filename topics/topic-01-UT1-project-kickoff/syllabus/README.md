@@ -1,4 +1,4 @@
-# Semana 01 — Syllabus
+# Topic 01 — Syllabus
 
 - El sistema Connectia: Alcance del alumnado (backend Express) vs. caja negra del servicio de IA.
 - Verificar el entorno de desarrollo (Node.js ≥ 20.19 y Git ≥ 2).

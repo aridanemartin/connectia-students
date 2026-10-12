@@ -1,4 +1,5 @@
-%% Reference system-context diagram for Week 01 — Project Kickoff.
+```mermaid
+%% Reference system-context diagram for Topic 01 — Project Kickoff.
 %% Used as the guided example inside README.md (Ejemplo guiado section).
 %% Teams produce their own version as Activity 4; the required element list
 %% is documented in exercises/system-diagram-template.md.
@@ -23,3 +24,4 @@ flowchart LR
     class backend student
     class ai teacher
     class db,pdf store
+```

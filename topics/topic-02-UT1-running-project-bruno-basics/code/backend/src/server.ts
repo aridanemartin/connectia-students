@@ -22,12 +22,12 @@ app.get('/health', (_req: Request, res: Response) => {
 
 app.get('/hello', (req: Request, res: Response) => {
   const rawName = req.query.name;
-  const name = typeof rawName === 'string' && rawName.trim() !== '' ? rawName.trim() : 'mundo';
+  const name = rawName ?? 'Mr. Nobody (Igual deberías intentar pasar un nombre en la query string, por ejemplo: /hello?name=Bruno 🐶)';
   res.status(200).json({ message: `Hola, ${name}!` });
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`Connectia Week 02 demo backend listening on http://localhost:${PORT}`);
+  console.log(`Connectia Topic 02 demo backend listening on http://localhost:${PORT}`);
 });
 
 server.on('error', (err: NodeJS.ErrnoException) => {

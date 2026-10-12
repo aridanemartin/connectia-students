@@ -50,4 +50,4 @@ git version 2.42.0
 ## ¿No puedes instalar en tu equipo?
 
 Habla con el profesorado. Los equipos de aula tienen Node.js y Git
-preinstalados y son un plan B válido para esta semana.
+preinstalados y son un plan B válido para este topic.

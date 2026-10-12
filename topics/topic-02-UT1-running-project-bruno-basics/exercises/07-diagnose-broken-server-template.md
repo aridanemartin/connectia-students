@@ -96,7 +96,7 @@ porque la primera ya lo tiene ocupado, y termina con un mensaje que nombra
 el puerto en conflicto. Cierra ambas terminales con `Ctrl+C` al terminar.
 
 > Nota de la salida real observada en macOS: puede aparecer brevemente la
-> línea "Connectia Week 02 demo backend listening..." seguida
+> línea "Connectia Topic 02 demo backend listening..." seguida
 > **inmediatamente** del mensaje de puerto ocupado, y el proceso termina con
 > código de salida distinto de cero. Documenta la salida real de tu propio
 > sistema operativo — puede variar ligeramente entre macOS, Linux y

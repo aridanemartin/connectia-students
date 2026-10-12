@@ -1,7 +1,7 @@
-# Semana 01 — Arranque del proyecto
+# Topic 01 — Arranque del proyecto
 
 Bienvenida y bienvenido al proyecto de la asignatura de **Desarrollo Web en
-Entorno Servidor** (DSW). Esta primera semana no escribimos aún ningún
+Entorno Servidor** (DSW). Esta primera topic no escribimos aún ningún
 backend; sentamos las bases para trabajar en equipo durante todo el curso:
 entendemos qué vamos a construir, con quién, sobre qué herramientas y con
 qué flujo de trabajo.
@@ -12,7 +12,7 @@ qué flujo de trabajo.
 
 ## Objetivos de aprendizaje
 
-Al finalizar esta semana serás capaz de:
+Al finalizar este topic serás capaz de:
 
 - Explicar en lenguaje claro el sistema completo que vamos a construir.
 - Distinguir qué partes son responsabilidad del alumnado (backend Express) y
@@ -27,7 +27,7 @@ Al finalizar esta semana serás capaz de:
 
 ## Prerrequisitos
 
-- Ninguno técnico: esta es la primera semana del curso.
+- Ninguno técnico: esta es la primera topic del curso.
 - Acceso a un ordenador (portátil personal o equipo de aula) donde puedas
   instalar Node.js ≥ 20.19 y Git ≥ 2. Si no puedes instalar en tu equipo, el
   profesorado tiene equipos de aula de reserva.
@@ -37,7 +37,7 @@ Al finalizar esta semana serás capaz de:
 - Cuenta de GitHub personal (gratuita) creada antes del inicio de la
   primera sesión.
 
-## Conceptos de la semana
+## Conceptos del topic
 
 - **Sistema Connectia** — La aplicación permite a cualquier visitante público
   hacer preguntas sobre información institucional del centro. Un
@@ -65,7 +65,7 @@ Al finalizar esta semana serás capaz de:
 ## Ejemplo guiado
 
 El profesor recorre el diagrama de contexto disponible en
-[`diagrams/system-context-diagram.mmd`](./diagrams/system-context-diagram.mmd)
+[`diagrams/system-context-diagram.md`](./diagrams/system-context-diagram.md)
 y explica cada componente y cada flecha en clase:
 
 ```mermaid
@@ -82,7 +82,7 @@ implementaréis (subida de PDF, autenticación de administrador, endpoint
 público de preguntas, gestión de versiones) y las que **no** implementaréis
 (OCR, extracción de texto, embeddings, ranking, inferencia). El límite entre
 "alcance del alumnado" y "caja negra" es lo más importante de esta primera
-semana.
+topic.
 
 ## Actividades del alumnado
 
@@ -90,7 +90,7 @@ semana.
 
 **Objetivo**: cada miembro deja VS Code preparado para leer el material del
 curso en local: vista previa de Markdown con estilo GitHub y renderizado de
-diagramas Mermaid (en `.md` y en ficheros `.mmd`).
+diagramas Mermaid (bloques ```` ```mermaid ```` dentro del Markdown).
 
 **Cómo**: sigue la guía
 [`exercises/00-vscode-markdown-mermaid-setup.md`](./exercises/00-vscode-markdown-mermaid-setup.md).
@@ -102,9 +102,10 @@ instalarlas de una vez.
 la Actividad 4. Opcionalmente, pega la salida de `code --list-extensions`
 en tu verificación de entorno como evidencia del editor preparado.
 
-**Criterio de aceptación**: la vista previa del `README.md` de la semana
+**Criterio de aceptación**: la vista previa del `README.md` del topic
 renderiza el diagrama del "Ejemplo guiado" y el fichero
-`diagrams/system-context-diagram.mmd` se previsualiza en VS Code.
+`diagrams/system-context-diagram.md` se renderiza en la vista previa de
+VS Code.
 
 ### Actividad 1 — Verificación individual del entorno
 
@@ -126,7 +127,7 @@ el comando exacto y variantes por sistema operativo.
 **Objetivo**: formar un equipo de 3 o 4 personas, asignar los cuatro roles
 del bloque actual y registrar el equipo.
 
-**Roles** (rotan cada ~4 semanas, un cambio por bloque pedagógico, ~5
+**Roles** (rotan cada ~4 topics, un cambio por bloque pedagógico, ~5
 rotaciones en el curso):
 
 - **Coordinador/a** — organiza reuniones, mantiene el ritmo, hace de enlace
@@ -134,7 +135,7 @@ rotaciones en el curso):
 - **Integrador/a** — protege la rama `main` del equipo, resuelve conflictos
   de fusión, revisa las *pull requests* con más atención.
 - **Responsable de calidad** — vela por los tests y por el cumplimiento del
-  contrato de la semana; escribe el checklist de aceptación del incremento.
+  contrato del topic; escribe el checklist de aceptación del incremento.
 - **Documentador/a** — mantiene el README de equipo actualizado, redacta las
   entradas del backlog y del diario del equipo.
 
@@ -173,7 +174,7 @@ sobre el repositorio de su equipo en GitHub.
 3. Añadir un fichero pequeño (por ejemplo, tu nombre en un fichero
    `team-docs/members/<tu-nombre>.md`).
 4. Confirmar los cambios con un mensaje en modo imperativo, subject line
-   ≤ 72 caracteres (no usamos Conventional Commits hasta la Semana 08).
+   ≤ 72 caracteres (no usamos Conventional Commits hasta la Topic 08).
 5. Publicar la rama en GitHub.
 6. Abrir una *pull request* hacia `main` del repositorio del equipo,
    pegando la plantilla de
@@ -223,18 +224,18 @@ flechas inequívoca; el diagrama se renderiza en GitHub sin errores.
 ### Actividad 5 — Backlog inicial
 
 **Objetivo**: dejar registrados, en una tabla sencilla, los ejercicios de la
-semana y qué ha hecho cada miembro del equipo (responsabilidades).
+topic y qué ha hecho cada miembro del equipo (responsabilidades).
 
 **Entregable**: `team-docs/initial-backlog.md` en el repositorio del equipo,
 siguiendo la plantilla
 [`exercises/02-initial-backlog-template.md`](./exercises/02-initial-backlog-template.md).
 
-**Criterio de aceptación**: cada ejercicio de la Semana 01 aparece con su
+**Criterio de aceptación**: cada ejercicio de la Topic 01 aparece con su
 descripción breve y al menos un miembro responsable.
 
-## Incremento semanal del proyecto
+## Incremento topicl del proyecto
 
-Al final de la Semana 01 cada equipo tiene:
+Al final de la Topic 01 cada equipo tiene:
 
 - Su **repositorio de equipo** con la carpeta `team-docs/` que incluye
   al menos: `team-roster.md`, `environment-verification.md`,
@@ -242,8 +243,8 @@ Al final de la Semana 01 cada equipo tiene:
 - Al menos **una PR fusionada por miembro** en el repositorio del equipo.
 - Un **canal de comunicación** documentado y probado.
 
-No se implementa código de backend esta semana. Comenzaremos con Node.js,
-TypeScript y Express en la Semana 03.
+No se implementa código de backend este topic. Comenzaremos con Node.js,
+TypeScript y Express en la Topic 03.
 
 ## Criterios de aceptación
 
@@ -255,7 +256,7 @@ TypeScript y Express en la Semana 03.
   del equipo, con al menos un comentario de revisión.
 - [ ] El diagrama de contexto contiene los seis elementos requeridos con el
   servicio de IA marcado como caja negra.
-- [ ] El backlog de la semana recoge cada ejercicio con su descripción breve
+- [ ] El backlog del topic recoge cada ejercicio con su descripción breve
   y quién lo ha hecho.
 - [ ] Ningún elemento del backlog asigna al alumnado tareas internas del
   servicio de IA (OCR, embeddings, inferencia, etc.).
@@ -299,7 +300,7 @@ TypeScript y Express en la Semana 03.
 > actualizará el identificador y el texto abreviado; la actividad y la
 > evidencia ya son válidas.
 
-| RA | Criterio de evaluación | Evidencia esta semana |
+| RA | Criterio de evaluación | Evidencia este topic |
 |----|------------------------|------------------------|
 | RA1 | `RA1.CE-pending-1` — *pendiente texto oficial* | Roster del equipo con 3–4 miembros y roles del Bloque 1 (Actividad 2) |
 | RA1 | `RA1.CE-pending-2` — *pendiente texto oficial* | Diagrama de contexto del sistema con los 6 elementos y la caja negra explícita (Actividad 4) |
@@ -313,7 +314,7 @@ Referencia normativa (pendiente):
 
 Responde a cada pregunta con **sí / con dudas / no**. Si respondes "con
 dudas" o "no" a alguna, revisa la sección correspondiente antes de continuar
-a la Semana 03.
+a la Topic 03.
 
 - ¿Puedo explicar en dos frases qué hace el sistema Connectia?
 - ¿Puedo enumerar las dos categorías de usuario del sistema?
@@ -327,6 +328,161 @@ a la Semana 03.
   PR → revisión → *merge*)?
 - ¿Puedo defender por qué cada rol del equipo existe?
 
-## Syllabus
+## Notas de sesión para el profesorado
 
-Consulta [`syllabus/README.md`](./syllabus/README.md) para la lista de items que debes conocer al superar esta semana.
+Guía operativa para impartir el topic: distribución del tiempo,
+preparación previa y guion de la sesión. El material para el alumnado está
+en las secciones anteriores; los apuntes pedagógicos de cada actividad
+viven dentro de sus plantillas en [`exercises/`](./exercises/).
+
+### Distribución de las 7 horas
+
+| Bloque | Tiempo | Descripción |
+|--------|--------|-------------|
+| Instrucción directa | 1 h | Contexto del proyecto, presentación del sistema Connectia, roles del alumnado y del profesorado, límite backend/IA. |
+| Demostración guiada | 1 h | Recorrido en vivo del diagrama de contexto (`diagrams/system-context-diagram.md`) y demostración completa del ciclo Git sobre un fichero de prueba. |
+| Práctica supervisada | 2 h | Cada estudiante instala las extensiones recomendadas de VS Code (Actividad 0, ~15 min) y ejecuta la verificación de entorno; cada equipo forma su roster y realiza al menos una PR fusionada por miembro. |
+| Trabajo de proyecto | 2 h | Cada equipo produce su diagrama de contexto (Actividad 4) y redacta el backlog inicial (Actividad 5). |
+| Revisión | 0,5 h | Revisión cruzada entre equipos: cada equipo revisa el diagrama y el backlog de otro equipo antes de la entrega. |
+| Evaluación | 0,5 h | Comprobación oral en pequeños grupos de la clasificación backend/IA + recogida de evidencias. |
+
+**Total: 7 horas.**
+
+### Preparación previa
+
+- [ ] Repositorio de **cada equipo** creado en GitHub y accesible por los
+  miembros del equipo (permiso `write`).
+- [ ] Rama `main` protegida en cada repositorio: prohibir *push* directo,
+  requerir PR.
+- [ ] Fichero `PULL_REQUEST_TEMPLATE.md` en `.github/` del repositorio
+  de cada equipo con el mismo contenido que
+  [`exercises/03-pull-request-template.md`](./exercises/03-pull-request-template.md).
+- [ ] Fichero `.vscode/extensions.json` presente en la raíz del repositorio
+  de cada equipo (recomendaciones de VS Code para la vista previa de Markdown y
+  Mermaid, Actividad 0). Verificar que, al clonar y abrir la carpeta con
+  VS Code, aparece la notificación de extensiones recomendadas.
+- [ ] Al menos **dos equipos de aula** con Node.js 22 LTS y Git 2.x
+  preinstalados como reserva.
+- [ ] Copia impresa (o digital compartida) de las cuatro plantillas de
+  entrega (`01-environment-verification-template.md`,
+  `02-team-roster-template.md`, `04-system-diagram-template.md`,
+  `02-initial-backlog-template.md`).
+- [ ] Diagrama de referencia `diagrams/system-context-diagram.md` verificado
+  visualmente (renderizarlo en GitHub o en la vista previa de VS Code antes
+  de clase).
+- [ ] Confirmar que cada estudiante ha creado ya su cuenta de GitHub
+  personal.
+
+### Guión de demostración
+
+1. **Presentación del sistema Connectia** (~15 min).
+   Cuenta el problema institucional: "los visitantes hacen preguntas sobre
+   normativa y necesitamos responder con exactitud citando el documento
+   oficial". Introduce las dos personas: visitante público y administrador.
+
+2. **Recorrido del diagrama de contexto** (~20 min).
+   Abre `diagrams/system-context-diagram.md` con su vista previa renderizada.
+   Recorre nodo por
+   nodo, explicando qué hace cada uno. Al llegar al servicio de IA, para
+   deliberadamente y anuncia: "todo lo que ocurra dentro de esta caja es
+   territorio del profesorado". Pregunta al aula: "¿dónde va la extracción
+   de texto del PDF?" (respuesta: dentro de la caja negra).
+
+3. **Regla de las preguntas públicas** (~5 min).
+   Explica y hace hincapié: no hay `document_id` en la petición pública. El
+   servicio de IA busca en todos los documentos activos. No existen sets.
+
+4. **Demostración en vivo del ciclo Git** (~30 min).
+   Sobre el repositorio del equipo, muestra el ciclo completo con un
+   fichero de prueba:
+   `git clone` → `git checkout -b feat/demo` → editar → `git add` →
+   `git commit -m "Add demo file"` → `git push -u origin feat/demo` →
+   abrir PR → aparentar revisión → *merge*.
+   Comenta el formato del mensaje de commit (imperativo, ≤ 72 caracteres).
+
+5. **Introducción a las actividades** (~5 min).
+   Recorrer brevemente la sección "Actividades del alumnado" del README:
+   recordar que la Actividad 0 (extensiones de VS Code) debe estar hecha
+   antes de la práctica, y señalar las plantillas correspondientes en
+   `exercises/`.
+
+**Plan de recuperación si algo falla en vivo**: usar el fichero de demo
+pre-creado en la rama `demo/kickoff` del repositorio (crear antes de clase)
+y comentar los pasos aunque no se ejecuten en directo.
+
+### Conceptos erróneos esperados
+
+- **"Tenemos que programar la búsqueda de respuestas"** — Respuesta:
+  la búsqueda ocurre dentro del servicio de IA (caja negra); vuestra tarea
+  es coordinar la petición y el trasporte de resultados.
+
+- **"Al preguntar tenemos que indicar sobre qué documento se pregunta"** —
+  Respuesta: no. El API público no acepta `document_id`. El servicio busca
+  en todos los documentos activos y devuelve citas que os permiten mostrar
+  la fuente.
+
+- **"El *force push* limpia el historial"** — Respuesta: y también borra el
+  trabajo de otros. Nunca hacemos *force push* sobre ramas compartidas.
+  Usamos revert o nuevos commits.
+
+- **"Los conflictos de merge son un fallo de Git"** — Respuesta: son
+  esperados y forman parte del flujo. Cuanto antes se abre la PR y se
+  integra, menos conflicto se acumula.
+
+- **"El rol asignado en el Bloque 1 es fijo todo el curso"** — Respuesta:
+  los roles rotan cada ~4 topics. Todo el mundo pasará por los cuatro.
+
+### Puntos de control
+
+- **Check 1 — tras el recorrido guiado del diagrama** (al final de la 1ª
+  hora): se pide a 3 estudiantes al azar que clasifiquen 3 tareas cada uno
+  como "backend alumnado" o "caja negra IA". Ejemplos de tareas: subir un
+  PDF, extraer el texto de un PDF, autenticar al administrador, generar
+  embeddings, guardar metadatos del documento, elegir la mejor respuesta,
+  responder al visitante público, activar una versión, buscar en el índice
+  vectorial, contar el número de documentos activos.
+  - Si ≥ 80 % clasifica correctamente → continuar.
+  - Si < 80 % → repetir la parte del guión sobre el límite y hacer un mapa
+    en la pizarra con dos columnas.
+
+- **Check 2 — a mitad de la práctica supervisada** (~4ª hora): verificar
+  que cada equipo ha entregado el roster (aunque falten rotaciones) y que
+  al menos un miembro por equipo ya tiene una PR abierta.
+  - Si algún equipo no lo ha logrado → intervención directa; asignar equipo
+    de aula si es problema de instalación.
+
+### Diferenciación
+
+- **Apoyo** para estudiantes con dificultades:
+  - Emparejar con un compañero o compañera experimentado para el flujo Git.
+  - Ofrecer el equipo de aula pre-configurado como plan B para la
+    verificación del entorno.
+  - Guión paso-a-paso adicional para la instalación de Node.js y Git en su
+    sistema operativo específico.
+
+- **Extensión** para estudiantes que terminan pronto:
+  - Redactar un pequeño *README* de equipo con las convenciones acordadas
+    (nombres de ramas, formato de commits, cómo pedir revisión).
+  - Preparar la instalación de Node.js 22 LTS en su equipo con el gestor de
+    versiones `fnm` o `volta`, en preparación para la Topic 03.
+  - Ayudar a otros equipos con conflictos de fusión reales.
+
+### Evidencias de evaluación (recogida por equipo)
+
+- [ ] Verificación de entorno con la salida `node --version && git --version`
+  de **cada** miembro del equipo. → Evidencia para `RA1.CE-pending-4`.
+- [ ] Roster del equipo con 3–4 miembros, cuatro roles del Bloque 1
+  asignados y cinco subsecciones de bloque preparadas. → Evidencia para
+  `RA1.CE-pending-1`.
+- [ ] **URL de al menos una PR fusionada por cada miembro** del equipo en
+  el repositorio del equipo, con al menos un comentario de revisión.
+  → Evidencia transversal (colaboración y flujo de trabajo).
+- [ ] Diagrama de contexto del equipo con los seis elementos y el servicio
+  de IA marcado como caja negra. → Evidencia para `RA1.CE-pending-2`.
+- [ ] Backlog inicial del equipo con 10–15 elementos, distribución mínima
+  por trimestre y cero `excluido-IA` en la versión aceptada. → Evidencia
+  para `RA1.CE-pending-3`.
+
+Consultar
+[`syllabus/README.md`](./syllabus/README.md)
+para la lista de items que el alumnado debe conocer al superar este topic.

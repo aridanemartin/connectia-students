@@ -1,9 +1,9 @@
-# Demo backend + Bruno collection — Semana 02
+# Demo backend + Bruno collection — Topic 02
 
 Este directorio contiene material **ya construido** por el profesorado.
 El alumnado lo ejecuta y lo prueba; no lo escribe. Construir una aplicación
 Node.js + TypeScript + Express propia empieza en la
-[Semana 03](../../topic-03-UT3-typescript-express-setup/).
+[Topic 03](../../topic-03-UT3-typescript-express-setup/).
 
 ## Estructura
 
@@ -35,7 +35,7 @@ Salida esperada:
 > topic-02-demo-backend@1.0.0 dev
 > tsx watch src/server.ts
 
-Connectia Week 02 demo backend listening on http://localhost:3000
+Connectia Topic 02 demo backend listening on http://localhost:3000
 ```
 
 En otra terminal:
@@ -66,5 +66,5 @@ npx @usebruno/cli run --env local
 
 ## Verificación
 
-Para la lista de items que el alumnado debe conocer al superar esta semana, ver
+Para la lista de items que el alumnado debe conocer al superar este topic, ver
 [`../syllabus/README.md`](../syllabus/README.md).

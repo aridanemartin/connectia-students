@@ -8,9 +8,9 @@
 ## Por qué esta actividad es la 00
 
 Todo el material de la asignatura es **Markdown y Mermaid**:
-ficheros `.md` (el README de cada semana, las plantillas de ejercicios) y
-diagramas Mermaid (bloques ```` ```mermaid ```` dentro del Markdown y
-ficheros `.mmd` en la carpeta `diagrams/`). GitHub los renderiza sin
+ficheros `.md` (el README de cada topic, las plantillas de ejercicios) con
+diagramas Mermaid en bloques ```` ```mermaid ```` dentro del propio
+Markdown. GitHub los renderiza sin
 configurar nada, pero cuando los tratas de leer en **local** el editor necesita dos cosas: saber usar
 la vista previa de Markdown (que VS Code ya trae de serie) y añadir las
 extensiones que renderizan Mermaid. Sin esto, la lectura de estos ficheros es mucho más incómoda.
@@ -29,7 +29,6 @@ previa estándar **no** hace:
 
 - Renderizar bloques ```` ```mermaid ````: los muestra como código.
 - Parecerse a GitHub: usa un estilo propio, no el de GitHub.
-- Previsualizar ficheros mermaid `.mmd` sueltos (los diagramas de `diagrams/`).
 
 Eso es exactamente lo que cubren las extensiones recomendadas.
 
@@ -45,9 +44,7 @@ de extensiones recomendadas. Este fichero lo que hace es que cuando abres la car
 | Extensión | Identificador | Qué aporta |
 |-----------|---------------|------------|
 | Markdown Preview GitHub Styling | `bierner.markdown-preview-github-styles` | La vista previa de Markdown adopta el estilo de GitHub: lo que ves en local es lo que verá quien revise tu PR |
-| Markdown Preview Mermaid Support | `bierner.markdown-mermaid` | Renderiza los bloques ```` ```mermaid ```` dentro de la vista previa de Markdown |
-| Mermaid Markdown Syntax Highlighting | `bpruitt-goddard.mermaid-markdown-syntax-highlighting` | Colorea la sintaxis Mermaid mientras editas, dentro de los `.md` y de los `.mmd` |
-| Mermaid Preview | `vstirbu.vscode-mermaid-preview` | Previsualiza ficheros `.mmd` sueltos (los de `diagrams/`) en una pestaña al lado del editor |
+| Markdown Preview Mermaid Support | `bierner.markdown-mermaid` | Renderiza los bloques ```` ```mermaid ```` dentro de la vista previa de Markdown (READMEs, ejercicios y diagramas de `assets/` y `diagrams/`) |
 
 ## Cómo instalarlas
 
@@ -77,16 +74,15 @@ de extensiones recomendadas. Este fichero lo que hace es que cuando abres la car
 
 ## Cómo usarlas: la prueba de fuego
 
-1. Abre el `README.md` de esta semana
+1. Abre el `README.md` de este topic
    (`topics/topic-01-UT1-project-kickoff/README.md`).
 2. Pulsa `Cmd/Ctrl+K V` para la vista previa al lado del editor y
    comprueba que el documento usa el estilo de GitHub (tablas, citas y cabeceras como
      en el navegador).
-3. Abre `diagrams/system-context-diagram.mmd` (el diagrama de referencia de
-   la semana) y previsualízalo con el botón de *preview* de la esquina
-   superior derecha del editor, o con la paleta de comandos (`Cmd/Ctrl+Shift+P`) →
-   **Mermaid Preview: Preview Diagram**. Deben aparecer los seis nodos:
-   backend en azul y servicio de IA en rojo discontinuo.
+3. Abre `diagrams/system-context-diagram.md` (el diagrama de referencia de
+   el topic) al lado de la vista previa: el bloque ```` ```mermaid ````
+   debe renderizar los seis nodos — backend en azul y servicio de IA en
+   rojo discontinuo.
 
 ## Apuntes: qué hace VS Code con `.vscode/extensions.json`
 

@@ -3,8 +3,8 @@
 ## Para qué sirve esta actividad
 
 `npm install`, `npm run dev` y `npm run build` son los tres comandos que
-van a ejecutar **todas las semanas** del curso, empezando por la que viene
-(Semana 03), cuando el backend ya sea vuestro. Esta semana los practicaran
+van a ejecutar **todas los topics** del curso, empezando por la que viene
+(Topic 03), cuando el backend ya sea vuestro. Este topic los practicaran
 sobre un proyecto sobre el que no habría que hacer nada: si algo falla, el problema
 está en el entorno (Node, npm, permisos), no en el código.
 

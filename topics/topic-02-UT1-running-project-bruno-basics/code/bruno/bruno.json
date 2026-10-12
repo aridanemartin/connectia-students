@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "Connectia Week 02 Demo",
+  "name": "Connectia Topic 02 Demo",
   "type": "collection",
   "ignore": ["node_modules", ".git"]
 }
