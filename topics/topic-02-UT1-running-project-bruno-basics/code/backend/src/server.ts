@@ -1,4 +1,7 @@
-import 'dotenv/config';
+// The .env file is loaded natively by Node via --env-file-if-exists=.env
+// (see the dev/start scripts in package.json). If the file is missing the
+// process continues and the check below prints a clear message.
+
 import express from 'express';
 import type { Request, Response } from 'express';
 

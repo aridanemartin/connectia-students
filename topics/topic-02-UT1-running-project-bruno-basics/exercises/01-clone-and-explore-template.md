@@ -4,10 +4,6 @@
 > como `team-docs/week-02/01-clone-and-explore.md` y rellena
 > cada sección.
 
-## Team
-
-`<Nombre del equipo>`
-
 ## Para qué sirve esta actividad
 
 Esta semana **no escribís backend**: ejecutáis y probáis uno que ya existe

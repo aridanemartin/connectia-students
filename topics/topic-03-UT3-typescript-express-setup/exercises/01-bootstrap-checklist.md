@@ -108,8 +108,13 @@ Son los paquetes que la aplicación necesita **en ejecución, también en
 producción**. Express es el servidor HTTP que usaremos:
 
 ```bash
-npm install express
+npm install express@5
 ```
+
+> El `@5` fija la **versión mayor**: npm instalará la última versión 5.x,
+> pero nunca una 6 que pudiera romper el código del curso. Lo haremos así con
+> todas las librerías: el proyecto crece topic a topic y todos los equipos
+> tienen que trabajar con las mismas versiones.
 
 Al terminar, npm ha descargado Express en `node_modules/` y ha **añadido
 automáticamente** el campo `dependencies` a tu `package.json`:
@@ -128,7 +133,7 @@ npm que la guarde en `devDependencies`. `tsx` ejecuta TypeScript
 directamente, con recarga en caliente al guardar:
 
 ```bash
-npm install -D tsx
+npm install -D tsx@4
 ```
 
 npm añade entonces el campo `devDependencies`:

@@ -20,7 +20,7 @@ node --version; git --version
 ### Salida esperada (ejemplo)
 
 ```text
-v20.11.1
+v22.12.0
 git version 2.42.0
 ```
 
@@ -28,7 +28,7 @@ git version 2.42.0
 
 | Herramienta | Mínimo | Recomendado |
 |-------------|--------|-------------|
-| Node.js | v18.0.0 | v20 LTS |
+| Node.js | v20.19.0 | v22 LTS |
 | Git | 2.0.0 | 2.42+ |
 
 ## Cómo capturar la evidencia
@@ -41,9 +41,9 @@ git version 2.42.0
 
 ## ¿Tu versión es insuficiente?
 
-- **Node.js < v18**: descarga Node.js 20 LTS desde
+- **Node.js < v20.19**: descarga Node.js 22 LTS desde
   [nodejs.org](https://nodejs.org) o usa un gestor de versiones (`nvm`,
-  `fnm`, `volta`) y ejecuta `nvm install 20 && nvm use 20`.
+  `fnm`, `volta`) y ejecuta `nvm install 22 && nvm use 22`.
 - **Git < 2.0**: instala la versión más reciente de Git desde
   [git-scm.com](https://git-scm.com) para tu sistema operativo.
 

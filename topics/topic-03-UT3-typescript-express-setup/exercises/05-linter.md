@@ -47,8 +47,12 @@ las cuatro piezas van a `devDependencies` (recuerda el `-D` de la
 Actividad 1):
 
 ```bash
-npm install -D eslint @eslint/js typescript-eslint globals
+npm install -D eslint@9 @eslint/js@9 typescript-eslint@8 globals@15
 ```
+
+> Como con TypeScript en la Actividad 3, fijamos la versión mayor de cada
+> paquete para que todos los equipos tengan exactamente la misma
+> configuración que el proyecto de referencia.
 
 Qué es cada una:
 

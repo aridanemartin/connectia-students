@@ -2,19 +2,18 @@
   "name": "topic-02-demo-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "Pre-built Node.js + TypeScript + Express demo backend for Week 02. Students run it; they do not write it.",
+  "description": "Pre-built Node.js + TypeScript + Express demo backend for Topic 02. Students run it; they do not write it.",
   "type": "module",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.19.0"
   },
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node --env-file-if-exists=.env dist/server.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
     "express": "^5.2.0"
   },
   "devDependencies": {

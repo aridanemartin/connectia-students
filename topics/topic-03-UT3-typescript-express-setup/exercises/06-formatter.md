@@ -53,7 +53,7 @@ y `format:check`):
 Como ESLint, solo se usa mientras programas → `devDependencies`:
 
 ```bash
-npm install -D prettier
+npm install -D prettier@3
 ```
 
 Un solo paquete: Prettier no necesita plugins para TypeScript, JSON o

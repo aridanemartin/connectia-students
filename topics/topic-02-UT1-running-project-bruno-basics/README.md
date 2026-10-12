@@ -30,7 +30,7 @@ Al finalizar esta semana serás capaz de:
 
 ## Prerrequisitos
 
-- **De la Semana 01**: Node.js ≥ 18 (recomendado 20 LTS) y Git ≥ 2
+- **De la Semana 01**: Node.js ≥ 20.19 (recomendado 22 LTS) y Git ≥ 2
   instalados y verificados; acceso al repositorio del curso (material y
   demo) y a tu propio repositorio de equipo;
   equipo de 3–4 personas formado con roles asignados.
@@ -225,8 +225,8 @@ idéntico para todos los equipos.
   un error `400`.
   **Cómo depurarlo**: recordar la regla de esta semana — el demo usa un
   valor por defecto (`"mundo"`) en vez de fallar; la validación estricta
-  de parámetros de entrada es un tema de la Semana 05 (REST y
-  validación), no de esta semana.
+  de parámetros de entrada es un tema de la Semana 07 (validación con
+  zod), no de esta semana.
 
 ## Mapeo DSW — RA1
 

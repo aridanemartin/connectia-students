@@ -8,10 +8,6 @@
 > del entorno, `02` roster del equipo, `03` flujo Git, `04` diagrama de
 > contexto y `05` este backlog.
 
-## Team
-
-`<Nombre del equipo>`
-
 ## Para qué sirve esta actividad
 
 El backlog es la **lista de trabajo del curso** en un equipo de trabajo real el backlog es un pilar fundamental para el éxito del proyecto. Cada vez que completemos un ejercicio, lo añadimos al backlog y asignamos responsabilidades. Sirve para dejar

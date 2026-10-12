@@ -19,7 +19,7 @@ Al finalizar esta semana serás capaz de:
   qué partes son responsabilidad del profesorado (servicio de IA como caja
   negra).
 - Enumerar los dos tipos de usuario público y administrador del sistema.
-- Verificar que tu entorno de desarrollo funciona (Node.js ≥ 18 y Git ≥ 2).
+- Verificar que tu entorno de desarrollo funciona (Node.js ≥ 20.19 y Git ≥ 2).
 - Completar el ciclo Git básico: clonar → crear rama → confirmar cambios →
   publicar → abrir *pull request* → recibir revisión → integrar.
 - Producir en equipo un diagrama de contexto del sistema y un backlog
@@ -29,7 +29,7 @@ Al finalizar esta semana serás capaz de:
 
 - Ninguno técnico: esta es la primera semana del curso.
 - Acceso a un ordenador (portátil personal o equipo de aula) donde puedas
-  instalar Node.js ≥ 18 y Git ≥ 2. Si no puedes instalar en tu equipo, el
+  instalar Node.js ≥ 20.19 y Git ≥ 2. Si no puedes instalar en tu equipo, el
   profesorado tiene equipos de aula de reserva.
 - Visual Studio Code instalado (gratuito,
   [code.visualstudio.com](https://code.visualstudio.com)). Lo necesitas
@@ -116,7 +116,7 @@ repositorio del equipo, siguiendo la plantilla
 [`exercises/01-environment-verification-template.md`](./exercises/01-environment-verification-template.md).
 
 **Criterio de aceptación**: cada miembro aparece con un bloque de salida
-literal de `node --version && git --version`; Node ≥ v18, Git ≥ 2.
+literal de `node --version && git --version`; Node ≥ v20.19, Git ≥ 2.
 
 Consulta [`code/verify-environment.md`](./code/verify-environment.md) para
 el comando exacto y variantes por sistema operativo.
@@ -173,7 +173,7 @@ sobre el repositorio de su equipo en GitHub.
 3. Añadir un fichero pequeño (por ejemplo, tu nombre en un fichero
    `team-docs/members/<tu-nombre>.md`).
 4. Confirmar los cambios con un mensaje en modo imperativo, subject line
-   ≤ 72 caracteres (no usamos Conventional Commits hasta la Semana 06).
+   ≤ 72 caracteres (no usamos Conventional Commits hasta la Semana 08).
 5. Publicar la rama en GitHub.
 6. Abrir una *pull request* hacia `main` del repositorio del equipo,
    pegando la plantilla de
@@ -262,11 +262,11 @@ TypeScript y Express en la Semana 03.
 
 ## Errores comunes y depuración
 
-- **Síntoma**: `node --version` devuelve una versión < v18.
+- **Síntoma**: `node --version` devuelve una versión < v20.19.
   **Causa habitual**: instalación antigua o gestor de versiones (nvm, fnm,
   volta) apuntando a una versión previa.
-  **Cómo depurarlo**: instalar Node.js 20 LTS desde
-  [nodejs.org](https://nodejs.org), o `nvm install 20 && nvm use 20`; volver
+  **Cómo depurarlo**: instalar Node.js 22 LTS desde
+  [nodejs.org](https://nodejs.org), o `nvm install 22 && nvm use 22`; volver
   a ejecutar el comando de verificación.
 
 - **Síntoma**: `git push` pide usuario y contraseña, y las credenciales no

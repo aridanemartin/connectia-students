@@ -190,7 +190,8 @@ servidor arranca en el 4000 sin tocar el código; `git status` muestra
 
 ### Actividad 3 — TypeScript estricto y el ciclo build/start
 
-**Objetivo**: añadir `tsconfig.json` con `"strict": true` y los scripts
+**Objetivo**: instalar `typescript@5`, `@types/node@20` y
+`@types/express@5`; añadir `tsconfig.json` con `"strict": true` y los scripts
 `typecheck`, `build` y `start`; comprobar que un error de tipo intencionado
 **rompe** el build y que `npm start` **exige un build previo**: sin
 `dist/`, Node falla con su error nativo `Cannot find module
@@ -389,6 +390,15 @@ Al final del topic cada equipo tiene:
   **Cómo depurarlo**: para la URL completa que llegó al servidor, usar
   `req.originalUrl`.
 
+- **Síntoma**: `npm run typecheck` falla con `TS7016: Could not find a
+  declaration file for module 'express'` y `TS2591: Cannot find name
+  'process'`, aunque `npm run dev` funciona.
+  **Causa habitual**: faltan los tipos de Express y de Node (`tsx` ejecuta
+  sin comprobar tipos, por eso `dev` no falla).
+  **Cómo depurarlo**: `npm install -D typescript@5 @types/node@20
+  @types/express@5`. Si alguien instaló TypeScript 6 o 7, el mismo comando
+  lo baja a la 5 (la que soporta `typescript-eslint` en la Actividad 5).
+
 - **Síntoma**: `tsconfig.json` tiene `"strict": false` "porque compilaba
   antes".
   **Causa habitual**: el Topic 03 exige `strict: true`; alguien lo
@@ -493,8 +503,8 @@ fichero y en las plantillas de [`exercises/`](./exercises/).
 
 2. **A1 en vivo: `package.json` y dependencias** (~20 min). Crear el
    `package.json` (con `"type": "module"`, `engines` y el script `dev`) e
-   instalar una dependencia de producción (`npm install express`) y una de
-   desarrollo (`npm install -D tsx`), mostrando en directo cómo npm las
+   instalar una dependencia de producción (`npm install express@5`) y una de
+   desarrollo (`npm install -D tsx@4`), mostrando en directo cómo npm las
    anota solas en `dependencies` y `devDependencies`. Escribir **un único**
    `src/server.ts` con el puerto **fijo en el código** (`const PORT = 3000`)
    y la ruta `/health/live`. `npm run dev` + `curl`: el servidor responde ya
@@ -510,7 +520,8 @@ fichero y en las plantillas de [`exercises/`](./exercises/).
    a `PORT=4000` y ver el servidor arrancar en el 4000 sin tocar código.
    Demo fail-fast: renombrar `.env` → `ENOENT`.
 
-4. **A3 en vivo: TypeScript y el ciclo build/start** (~20 min). Escribir
+4. **A3 en vivo: TypeScript y el ciclo build/start** (~20 min). Instalar
+   `npm install -D typescript@5 @types/node@20 @types/express@5`; escribir
    `tsconfig.json` justificando cada opción; añadir `typecheck`, `build` y
    `start` (que ejecuta `node dist/server.js`). Demo: error de tipo rompe
    el build; sin `dist/`, `npm start` muestra el error nativo de Node

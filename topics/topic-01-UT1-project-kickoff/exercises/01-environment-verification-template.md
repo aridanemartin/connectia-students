@@ -28,7 +28,7 @@ node --version && git --version
 ```
 
 - **`node --version`** — imprime la versión de Node.js instalada. La salida
-  empieza con `v` (de *version*): `v20.11.1` significa Node.js 20.11.1.
+  empieza con `v` (de *version*): `v22.12.0` significa Node.js 22.12.0.
 - **`&&`** — el operador "y entonces". Ejecuta el segundo comando **solo
   si el primero termina con éxito** (código 0). Si `node` no estuviera
   instalado o fallara, `git --version` ni siquiera se intenta.
@@ -48,11 +48,11 @@ usa `&&` con la misma semántica). La plantilla admite ambas variantes.
 
 | Herramienta | Mínimo | Recomendado | Por qué |
 |-------------|--------|-------------|---------|
-| Node.js | v18.0.0 | v20 LTS | El backend de la Semana 03 exige Node 20+; v18 es el suelo mínimo absoluto |
+| Node.js | v20.19.0 | v22 LTS | El backend de la Semana 03 exige Node 20.19+ (`process.loadEnvFile()`, ESLint) |
 | Git | 2.0.0 | 2.42+ | El flujo de PR y ramas de la Semana 01 funciona con Git ≥ 2 |
 
 Lectura de la salida: si tu Node imprime `v16.x`, es **insuficiente**. Si
-imprime `v18.19.0` o `v20.11.1`, **cumples**. Si Git imprime `git version
+imprime `v20.19.0` o `v22.12.0`, **cumples**. Si Git imprime `git version
 2.39.0`, **cumples** (≥ 2.0).
 
 ## Cómo capturar la evidencia

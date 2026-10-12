@@ -5,10 +5,6 @@
 > `team-docs/week-02/03-bruno-install-and-collection.md` y
 > rellena cada sección.
 
-## Team
-
-`<Nombre del equipo>`
-
 ## Para qué sirve esta actividad
 
 [Bruno](https://www.usebruno.com/) es un cliente de API gratuito y de

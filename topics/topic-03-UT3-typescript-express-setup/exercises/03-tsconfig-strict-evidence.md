@@ -5,8 +5,9 @@
 La Actividad 1 creó el `package.json` y el `src/server.ts`, y la Actividad 2
 sacó la configuración del código al `.env`. El servidor arranca con `tsx` y
 responde en `/health/live` — pero `tsx` ejecuta TypeScript sin comprobar
-tipos y sin build. Esta actividad añade dos piezas:
+tipos y sin build. Esta actividad añade tres piezas:
 
+- **TypeScript y los tipos de Node y Express** como `devDependencies`.
 - **`tsconfig.json`** — la configuración de TypeScript, en modo `strict`.
 - **Los scripts `typecheck`, `build` y `start`** en `package.json`.
 
@@ -14,8 +15,9 @@ Con esto el proyecto tiene el ciclo completo
 `npm install → npm run typecheck → npm run build → npm start`, y la
 siguiente actividad añadirá la configuración centralizada.
 
-> **En tu repositorio del backend**: añade `tsconfig.json` y los scripts
-> `typecheck`, `build` y `start` a tu `package.json`.
+> **En tu repositorio del backend**: instala TypeScript y los tipos, añade
+> `tsconfig.json` y los scripts `typecheck`, `build` y `start` a tu
+> `package.json`.
 >
 > **Avance de vuestra API**: a partir de ahora todo incremento de la API de
 > documents/questions deberá compilar en estricto y poder ejecutarse
@@ -28,7 +30,7 @@ Crea **una pieza nueva** (`tsconfig.json`) y **modifica otra**
 
 ```
 ./   (raíz del repositorio del backend)
-├── package.json     # A1: MODIFICADO en A3 — se añaden los scripts typecheck, build y start
+├── package.json     # A1: MODIFICADO en A3 — nuevas devDependencies y scripts typecheck, build y start
 ├── tsconfig.json    # A3: NUEVO — configuración estricta de TypeScript
 ├── .gitignore       # A2: sin cambios (ignora node_modules/, dist/ y .env)
 ├── .env.example     # A2: sin cambios
@@ -40,6 +42,28 @@ No se crea nada más en esta actividad: `npm run build` genera `dist/`, pero
 esa es salida del compilador, no un fichero que escribas a mano (y ya está
 en `.gitignore`). `config/env.ts`, `eslint.config.js`, `.prettierrc.json`,
 `app.ts` y `routes/health.ts` se añaden en las Actividades 4-7.
+
+## Paso 1 — instalar TypeScript y los tipos
+
+`tsx` ejecuta TypeScript, pero **no** trae el compilador `tsc`. Instálalo,
+junto con los tipos de Node y de Express, con **un solo comando**:
+
+```bash
+npm install -D typescript@5 @types/node@20 @types/express@5
+```
+
+| Paquete | Para qué sirve |
+|---|---|
+| `typescript@5` | El compilador `tsc`. Fijamos la versión 5 porque el linter de la Actividad 5 (`typescript-eslint`) todavía no funciona con TypeScript 6 o superior. |
+| `@types/node@20` | Los tipos de Node: sin ellos `tsc` no sabe qué es `process`. |
+| `@types/express@5` | Los tipos de Express 5: sin ellos `tsc` no sabe qué son `express()`, `req` y `res`. |
+
+> Si te saltas este paso, `npm run typecheck` falla con
+> `tsc: command not found` (falta TypeScript) o con
+> `TS7016: Could not find a declaration file for module 'express'` y
+> `TS2591: Cannot find name 'process'` (faltan los tipos). Los dos se
+> arreglan con el comando de arriba. Que `npm run dev` siga funcionando no
+> contradice esto: `tsx` ejecuta sin comprobar tipos.
 
 ## Apuntes: qué es TypeScript y por qué "estricto"
 
