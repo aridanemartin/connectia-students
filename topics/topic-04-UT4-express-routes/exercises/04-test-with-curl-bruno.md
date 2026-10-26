@@ -26,8 +26,11 @@ Ejecuta y captura cada caso:
 | 2 | `POST /api/v1/admin/documents` con `{"title":"X"}` | `201` |
 | 3 | `POST /api/v1/admin/documents` con `{}` | `400` |
 | 4 | `GET /api/v1/admin/documents/<id inexistente>` | `404` |
-| 5 | `POST /api/v1/questions` con `{"question":"hola"}` | `200` |
-| 6 | `POST /api/v1/questions` con `{"question":"  "}` | `400` |
+| 5 | `GET /api/v1/admin/documents?page=1&limit=1` | `200` con **un** documento y `pagination` |
+| 6 | `PATCH /api/v1/admin/documents/<id de la fila 2>` con `{"title":"Y"}` | `200` |
+| 7 | `POST /api/v1/questions` con `{"question":"hola"}` | `200` |
+| 8 | `POST /api/v1/questions` con `{"question":"  "}` | `400` |
+| 9 | `GET /health/live` (del Topic 03) | `200` |
 
 Después replicalas en **Bruno** y compara el resultado con el
 de `curl`: debe ser la misma petición.

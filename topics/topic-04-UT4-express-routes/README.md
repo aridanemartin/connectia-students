@@ -5,10 +5,13 @@ En el Topic 03 dejasteis un servidor Express mínimo con **una** ruta
 meteros con arquitectura por capas y middleware, aprendemos lo más importante
 de una API: **cómo se definen rutas y qué significa cada verbo HTTP**.
 
-Este topic es deliberadamente **llano**: añadimos rutas directamente sobre la
-app, con la lógica escrita ahí mismo. Nada de controladores, servicios ni
-middleware todavía — eso llega en el Topic 05. La meta es que cada equipo tenga
-sus **endpoints funcionando** (en memoria) cuanto antes.
+Este topic es deliberadamente **llano**: cada recurso tiene su propio
+`Router` (igual que el `healthRouter` del Topic 03) y la lógica se escribe
+dentro de cada ruta. Nada de controladores, servicios ni middleware propio
+todavía — eso llega en el Topic 05. La meta es que cada equipo tenga sus
+**endpoints funcionando** (en memoria) cuanto antes, **sin tocar** lo que ya
+funcionaba: `createApp()`, `server.ts` y `GET /health/live` se quedan como
+estaban.
 
 > **Idioma**: las explicaciones pedagógicas están en español. Los
 > identificadores técnicos (`GET`, `req.params`, `app.post`, etc.) van en
@@ -20,7 +23,8 @@ Al finalizar este topic serás capaz de:
 
 - Explicar qué hace cada **verbo HTTP** (`GET`, `POST`, `PUT`, `PATCH`,
   `DELETE`) y cuándo usar cada uno.
-- Definir rutas en Express con `app.get(...)`, `app.post(...)`, etc.
+- Definir rutas en un `Router` por recurso (`router.get(...)`,
+  `router.post(...)`, etc.) y montarlo en `createApp()` con `app.use(...)`.
 - Leer datos de la petición: `req.params` (path), `req.query` (query) y
   `req.body` (cuerpo JSON).
 - Construir respuestas con el código de estado correcto (`res.status(...)`).
@@ -38,15 +42,25 @@ Al finalizar este topic serás capaz de:
 
 ### Ruta = método + path
 
-Una ruta se define con el **método** y el **path**:
+Una ruta se define con el **método** y el **path**. Como en el Topic 03, las
+rutas de un mismo recurso se agrupan en un `Router` que se monta bajo un
+prefijo:
 
 ```ts
-app.get('/api/v1/questions', (req, res) => { /* ... */ });
-app.post('/api/v1/questions', (req, res) => { /* ... */ });
+// src/routes/articles.ts
+export const articlesRouter = Router();
+
+articlesRouter.get('/', (req, res) => { /* ... */ });  // GET  /api/v1/articles
+articlesRouter.post('/', (req, res) => { /* ... */ }); // POST /api/v1/articles
+
+// src/app.ts, dentro de createApp()
+app.use('/api/v1/articles', articlesRouter);
 ```
 
 - El **path** nombra el recurso (sustantivo): `/questions`, `/documents`.
 - El **método** aporta la acción: `GET` lee, `POST` crea, `PATCH` modifica.
+- La URL final es **prefijo del `app.use` + path del router**, igual que
+  `/health` + `/live` = `/health/live`.
 
 ### Verbos HTTP
 
@@ -64,16 +78,16 @@ mal; `POST /documents` está bien.
 ### De dónde salen los datos
 
 ```ts
-app.get('/api/v1/documents/:documentId', (req, res) => {
-  const { documentId } = req.params; // path:  /documents/123
+articlesRouter.get('/:articleId', (req, res) => {
+  const { articleId } = req.params; // path:  /articles/123
 });
 
-app.get('/api/v1/documents', (req, res) => {
-  const { page } = req.query;        // query: ?page=1
+articlesRouter.get('/', (req, res) => {
+  const { page } = req.query;       // query: ?page=1
 });
 
-app.post('/api/v1/documents', (req, res) => {
-  const { title } = req.body;        // body JSON (necesita express.json())
+articlesRouter.post('/', (req, res) => {
+  const { title } = req.body;       // body JSON (necesita express.json())
 });
 ```
 
@@ -92,27 +106,35 @@ Si no llamas a `res.status(...)`, Express responde `200` por defecto.
 ### Implementación simple (la de este topic)
 
 Guardamos los datos en un array **en memoria** y escribimos la lógica en la
-propia ruta:
+propia ruta del router:
 
 ```ts
-const documents: Array<{ id: string; title: string }> = [];
+const articles: Article[] = [];
 
-app.get('/api/v1/documents', (_req, res) => {
-  res.json({ documents });
+articlesRouter.get('/', (_req, res) => {
+  res.json({ data: articles });
 });
 
-app.post('/api/v1/documents', (req, res) => {
-  const { title } = req.body;
+articlesRouter.post('/', (req, res) => {
+  const { title, description } = req.body;
 
   if (!title) {
     return res.status(400).json({ error: 'MISSING_TITLE' });
   }
 
-  const document = { id: crypto.randomUUID(), title };
-  documents.push(document);
-  res.status(201).json({ document });
+  const article = {
+    id: randomUUID(),
+    title,
+    description: description ?? '',
+    createdAt: new Date().toISOString(),
+  };
+  articles.push(article);
+  res.status(201).json({ data: article });
 });
 ```
+
+Las respuestas de éxito van siempre dentro de `data` (`{ "data": [...] }` o
+`{ "data": { ... } }`): es la forma que mantendremos en todo el proyecto.
 
 Es lo más sencillo que funciona. **No es la versión final**: en el Topic 05
 esta lógica se reparte en rutas, controladores y servicios; en el Topic 07 se
@@ -125,13 +147,18 @@ valida con `zod`; y más adelante se guarda en PostgreSQL.
 ## Ejemplo guiado
 
 El profesorado construye en vivo, sobre el proyecto del Topic 03, un recurso
-completo con un array en memoria:
+de práctica (`articles`, con la misma forma que un documento) con un array en
+memoria. Los documentos y las preguntas de Connectia los construye cada equipo
+en las actividades:
 
-1. Añadir `express.json()` si no está.
-2. Definir `GET /api/v1/documents` (lista).
-3. Definir `POST /api/v1/documents` (crear con `req.body`).
-4. Definir `GET /api/v1/documents/:documentId` (elemento con `req.params`).
-5. Probar con `curl -i` cada caso y señalar el estado de la respuesta.
+1. Crear `src/routes/articles.ts` con un `Router` vacío y montarlo en
+   `createApp()` con `app.use('/api/v1/articles', articlesRouter)`, **junto**
+   al router de health.
+2. Definir `GET /` (lista) y `POST /` (crear con `req.body`).
+3. Definir `GET /:articleId` (elemento con `req.params`) y `PATCH /:articleId`.
+4. Paginar la lista con `?page=` y `?limit=` (`req.query`).
+5. Probar con `curl -i` cada caso, señalar el estado de la respuesta y
+   comprobar que `GET /health/live` sigue respondiendo.
 
 El proyecto de referencia está en [`code/backend/`](./code/backend/); consulta
 [`code/README.md`](./code/README.md) para ejecutarlo.
@@ -150,22 +177,32 @@ Las actividades viven en [`./exercises/`](./exercises/). Se completan en orden.
 ## Incremento del topic en el proyecto
 
 Al final del topic, el backend de cada equipo implementa **de forma sencilla**
-(en memoria, sin capas):
+(en memoria, sin capas), en `src/routes/documents.ts` y
+`src/routes/questions.ts`, montados en `createApp()` junto al router de health
+del Topic 03:
 
 - `POST /api/v1/questions` — recibe una pregunta y devuelve una respuesta
   simulada fija.
-- `GET /api/v1/admin/documents` — lista de documentos.
+- `GET /api/v1/admin/documents` — lista de documentos, paginada con `?page=`
+  y `?limit=`.
 - `POST /api/v1/admin/documents` — crea metadatos de un documento.
 - `GET /api/v1/admin/documents/{documentId}` — consulta un documento.
 - `PATCH /api/v1/admin/documents/{documentId}` — actualiza parte de un
   documento.
 
-No hay base de datos, ni controladores/servicios, ni middleware propio, ni
-validación con esquemas, ni IA. Todo eso llega después.
+`GET /health/live` sigue respondiendo `{"status":"live"}`. No hay base de
+datos, ni controladores/servicios, ni middleware propio, ni validación con
+esquemas, ni IA. Todo eso llega después.
 
 ## Criterios de aceptación
 
-- [ ] Las cinco rutas existen y responden JSON.
+- [ ] Las cinco rutas existen y responden JSON; las de éxito, dentro de
+      `data`.
+- [ ] `src/app.ts` sigue exportando `createApp()` y `GET /health/live` sigue
+      respondiendo.
+- [ ] Cada recurso tiene su router (`src/routes/documents.ts`,
+      `src/routes/questions.ts`) montado con `app.use(...)`.
+- [ ] `npm run typecheck` y `npm run lint` pasan.
 - [ ] `GET` devuelve `200`; `POST` que crea devuelve `201`; un documento
       inexistente devuelve `404`.
 - [ ] Se leen datos de `req.params`, `req.query` y `req.body` correctamente.
@@ -174,12 +211,23 @@ validación con esquemas, ni IA. Todo eso llega después.
 
 ## Errores comunes y depuración
 
-- **`req.body` es `undefined`** — falta `app.use(express.json())` antes de las
-  rutas.
+- **`server.ts` no arranca: `has no exported member 'createApp'`** — se ha
+  sustituido `app.ts` entero por rutas sueltas. Recupera la factoría del
+  Topic 03 y añade solo el `import` y el `app.use(...)` del router nuevo.
+- **`GET /health/live` da `404`** — al tocar `app.ts` se ha borrado
+  `app.use('/health', healthRouter)`.
+- **El prefijo aparece dos veces** — `app.use('/api/v1/admin/documents', ...)`
+  más `documentsRouter.get('/api/v1/admin/documents', ...)` publica
+  `/api/v1/admin/documents/api/v1/admin/documents`. Dentro del router, los
+  paths son relativos: `'/'` y `'/:documentId'`.
+- **`req.body` es `undefined`** — falta `app.use(express.json())` antes de los
+  routers.
 - **El verbo en el path** (`/getDocuments`) — usa el método HTTP y un path de
   sustantivo: `GET /documents`.
-- **Comparar `req.params.id` con un número** — los parámetros llegan como
-  texto; compara como texto o convierte.
+- **Comparar `req.params.documentId` con un número** — los parámetros llegan
+  como texto; compara como texto o convierte.
+- **`?page=2` no pagina bien** — `req.query.page` es `"2"` (texto); conviértelo
+  con `Number(...)` antes de operar.
 - **Olvidar `return` tras responder** — si respondes y sigues ejecutando,
   puedes intentar responder dos veces (`Cannot set headers after they are
   sent`).
@@ -201,7 +249,7 @@ validación con esquemas, ni IA. Todo eso llega después.
 Responde **sí / con dudas / no**:
 
 - ¿Puedo explicar para qué sirve cada verbo HTTP?
-- ¿Puedo definir una ruta con `app.get(...)` y `app.post(...)`?
+- ¿Puedo definir rutas en un router (`router.get(...)`, `router.post(...)`) y montarlo en `createApp()`?
 - ¿Puedo leer `req.params`, `req.query` y `req.body`?
 - ¿Puedo elegir el código de estado correcto (`200`, `201`, `400`, `404`)?
 - ¿Puedo implementar un CRUD en memoria sin ayuda?
@@ -219,7 +267,10 @@ implementación más simple posible. No se explica arquitectura ni middleware:
 eso es el Topic 05. Límites que deben repetirse:
 
 - los datos viven en un array en memoria (se pierden al reiniciar);
-- la lógica se escribe **en la ruta**, a propósito;
+- cada recurso tiene su `Router` (como el de health del Topic 03) y la lógica
+  se escribe **en la ruta**, a propósito;
+- `createApp()`, `server.ts` y `GET /health/live` no se tocan: solo se añaden
+  routers;
 - solo hay comprobaciones mínimas a mano; la validación formal es el Topic 07;
 - no hay persistencia, autenticación, subida de ficheros ni IA.
 
@@ -228,7 +279,7 @@ eso es el Topic 05. Límites que deben repetirse:
 | Bloque | Tiempo | Descripción |
 |--------|--------|-------------|
 | Instrucción directa | 1 h | Verbos HTTP, ruta = método + path, `params`/`query`/`body`, códigos de estado |
-| Demostración guiada | 1 h | Construcción en vivo del CRUD en memoria sobre el proyecto del Topic 03 |
+| Demostración guiada | 1 h | Construcción en vivo del CRUD en memoria de `articles` sobre el proyecto del Topic 03 |
 | Práctica supervisada | 2 h | Actividades 1–3 con guía activa |
 | Trabajo de proyecto | 2 h | Implementar los cinco endpoints de Connectia en el backend del equipo |
 | Revisión | 0,5 h | Revisión cruzada de rutas y de códigos de estado |
@@ -247,11 +298,15 @@ eso es el Topic 05. Límites que deben repetirse:
 
 1. **Verbo + path** (~15 min): convertir casos de uso en método + ruta; anotar
    una mala práctica (`/getDocuments`).
-2. **Lista y creación** (~20 min): `GET` y `POST` con un array en memoria.
-3. **Elemento y edición** (~20 min): `GET /:id` con `req.params` y `PATCH` con
-   `req.body`.
-4. **Estados** (~10 min): `200`, `201`, `404` con `curl -i`.
-5. **Cierre** (~5 min): "esto es lo más simple; repartirlo en capas es el
+2. **Un router nuevo** (~10 min): abrir `app.ts` y `routes/health.ts` del
+   Topic 03, crear `routes/articles.ts` y montarlo **al lado** del health.
+   Remarcar que la factoría no se toca.
+3. **Lista y creación** (~20 min): `GET /` y `POST /` con un array en memoria.
+4. **Elemento, edición y query** (~20 min): `GET /:articleId` con
+   `req.params`, `PATCH` con `req.body` y paginación con `req.query`.
+5. **Estados** (~10 min): `200`, `201`, `404` con `curl -i`; terminar con
+   `curl /health/live`.
+6. **Cierre** (~5 min): "esto es lo más simple; repartirlo en capas es el
    Topic 05".
 
 ### Conceptos erróneos esperados
@@ -260,6 +315,10 @@ eso es el Topic 05. Límites que deben repetirse:
 - «`req.body` siempre está» — solo si `express.json()` está montado.
 - «`req.params` ya es número» — llega como texto.
 - «Hay que crear controladores ya» — no en este topic; primero que funcione.
+- «Para añadir rutas hay que reescribir `app.ts`» — no: se crea un router
+  nuevo y se añade una línea `app.use(...)` dentro de `createApp()`.
+- «Un router por recurso ya es una capa» — no: solo agrupa rutas; la lógica
+  sigue dentro de cada ruta hasta el Topic 05.
 
 ### Evidencias de evaluación (recogida por equipo)
 

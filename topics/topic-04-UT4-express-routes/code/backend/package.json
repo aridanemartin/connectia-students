@@ -1,8 +1,8 @@
 {
-  "name": "topic04-express-routes",
+  "name": "topic-04-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "Minimal Express routes reference for Topic 04.",
+  "description": "Reference Express backend with per-resource routers for Topic 04.",
   "type": "module",
   "engines": {
     "node": ">=20.19.0"
@@ -11,15 +11,23 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "express": "^5.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@types/express": "^5.0.0",
     "@types/node": "^20.14.10",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
     "tsx": "^4.19.1",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.7.0"
   }
 }
