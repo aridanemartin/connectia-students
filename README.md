@@ -19,6 +19,7 @@ que avanza el curso.
 | 01 | Arranque del proyecto | [topic-01-UT1-project-kickoff](./topics/topic-01-UT1-project-kickoff/) |
 | 02 | Ejecutar el proyecto y probar endpoints con Bruno | [topic-02-UT1-running-project-bruno-basics](./topics/topic-02-UT1-running-project-bruno-basics/) |
 | 03 | Configuración de TypeScript y Express | [topic-03-UT3-typescript-express-setup](./topics/topic-03-UT3-typescript-express-setup/) |
+| 04 | Rutas y verbos HTTP | [topic-04-UT4-express-routes](./topics/topic-04-UT4-express-routes/) |
 
 Índice detallado: [`topics/README.md`](./topics/README.md).
 
