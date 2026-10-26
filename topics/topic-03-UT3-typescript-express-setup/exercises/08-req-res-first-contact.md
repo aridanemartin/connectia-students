@@ -21,7 +21,7 @@ dice "este parámetro no lo uso" (para que el linter no se queje de que hay una 
 | Objeto | Qué representa | Qué contiene / permite |
 |--------|----------------|------------------------|
 | `req` (Request) | La **petición entrante**, ya parseada | `req.method` (`GET`, `POST`...), `req.originalUrl` (la URL completa), `req.headers` (cabeceras), `req.query` (query params), `req.body` (cuerpo, si algún middleware lo parseó) |
-| `res` (Response) | La **respuesta saliente**: es vuestra tumanija para contestar | `res.status(código)` fija el código HTTP, `res.json(objeto)` envía JSON, `res.send(texto)` envía texto/HTML |
+| `res` (Response) | La **respuesta saliente**: es vuestra herramienta para contestar | `res.status(código)` fija el código HTTP, `res.json(objeto)` envía JSON, `res.send(texto)` envía texto/HTML |
 
 Una petición HTTP tiene método, ruta, cabeceras y cuerpo; una respuesta
 tiene código de estado, cabeceras y cuerpo. **`req` y `res` son eso
