@@ -9,3 +9,4 @@ se añadirán a medida que avance el curso.
 | 02 | Ejecutar el proyecto y probar endpoints con Bruno | [topic-02-UT1-running-project-bruno-basics](./topic-02-UT1-running-project-bruno-basics/) |
 | 03 | Configuración de TypeScript y Express | [topic-03-UT3-typescript-express-setup](./topic-03-UT3-typescript-express-setup/) |
 | 04 | Rutas y verbos HTTP | [topic-04-UT4-express-routes](./topic-04-UT4-express-routes/) |
+| 05 | Arquitectura de Express y middleware | [topic-05-UT4-express-architecture-middleware](./topic-05-UT4-express-architecture-middleware/) |
