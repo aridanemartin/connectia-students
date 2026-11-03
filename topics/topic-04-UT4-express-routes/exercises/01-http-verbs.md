@@ -17,17 +17,18 @@ Ejemplo con una app distinta de Connectia (una lista de tareas):
 
 | Verbo | Significado | Ejemplo |
 |-------|-------------|---------|
-| `GET` | Lee una tarea | `GET /api/v1/tasks` |
+| `GET` | Listar todas las tareas | `GET /api/v1/tasks` |
+| `GET` | Leer una tarea concreta | `GET /api/v1/tasks/{id}` |
 | `POST` | Crear una tarea | `POST /api/v1/tasks` |
 | `PUT` | Reemplazar una tarea entera | `PUT /api/v1/tasks/{id}` |
-| `PATCH` | Modificar **parte** de una tarea por ejemplo su título o la persona asignada | `PATCH /api/v1/tasks/{id}` |
+| `PATCH` | Modificar **parte** de una tarea, por ejemplo su título o la persona asignada | `PATCH /api/v1/tasks/{id}` |
 | `DELETE` | Eliminar una tarea | `DELETE /api/v1/tasks/{id}` |
 
 El verbo **nunca** va en el path. `/getTasks` o `/createTask` están mal;
 `GET /tasks` y `POST /tasks` están bien.
 
 Fíjate en el detalle: la misma ruta `/api/v1/tasks` cambia de significado según
-el método. `GET` la lee; `POST` crea. Y lo mismo con `/api/v1/tasks/{id}`:
+el método. `GET` lista las tareas; `POST` crea una nueva. Y lo mismo con `/api/v1/tasks/{id}`:
 `GET` lo consulta, `PUT`/`PATCH` lo modifican y `DELETE` lo borra.
 
 ## Ejercicio: tradúcelo a Connectia

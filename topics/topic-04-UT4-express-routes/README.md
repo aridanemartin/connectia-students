@@ -31,6 +31,8 @@ Al finalizar este topic serás capaz de:
 - Implementar los endpoints de Connectia **de la forma más sencilla posible**,
   con un array en memoria.
 - Probarlos con `curl`/Bruno y comprobar el estado y el cuerpo.
+- Crear y guardar en el repositorio **la colección de Bruno del equipo**,
+  con una petición por prueba y su `Assert` de estado.
 
 ## Prerrequisitos
 
@@ -172,7 +174,7 @@ Las actividades viven en [`./exercises/`](./exercises/). Se completan en orden.
 | 1 | Verbos HTTP: elige el método correcto | [`01-http-verbs.md`](./exercises/01-http-verbs.md) |
 | 2 | Primeras rutas: lista y creación | [`02-first-routes.md`](./exercises/02-first-routes.md) |
 | 3 | CRUD en memoria (los 5 endpoints de Connectia) | [`03-crud-in-memory.md`](./exercises/03-crud-in-memory.md) |
-| 4 | Probar con `curl` y Bruno | [`04-test-with-curl-bruno.md`](./exercises/04-test-with-curl-bruno.md) |
+| 4 | Probar con `curl` y crear la colección de Bruno del equipo | [`04-test-with-curl-bruno.md`](./exercises/04-test-with-curl-bruno.md) |
 
 ## Incremento del topic en el proyecto
 
@@ -208,6 +210,8 @@ esquemas, ni IA. Todo eso llega después.
 - [ ] Se leen datos de `req.params`, `req.query` y `req.body` correctamente.
 - [ ] El verbo correcto en cada ruta (no hay verbos en el path).
 - [ ] Las cuatro actividades están entregadas con capturas de `curl`/Bruno.
+- [ ] El equipo tiene su colección en `bruno/connectia/` del repositorio
+      del backend, con una petición por prueba de la Actividad 4.
 
 ## Errores comunes y depuración
 
@@ -319,6 +323,10 @@ eso es el Topic 05. Límites que deben repetirse:
   nuevo y se añade una línea `app.use(...)` dentro de `createApp()`.
 - «Un router por recurso ya es una capa» — no: solo agrupa rutas; la lógica
   sigue dentro de cada ruta hasta el Topic 05.
+- «Bruno guarda solo» — no: hasta pulsar `Ctrl+S`/`Cmd+S` la petición solo
+  existe en la pestaña abierta y no aparece en `git status`.
+- «La fila 6 falla, mi `PATCH` está mal» — casi siempre es que se reinició
+  el servidor y el `id` copiado ya no existe (los datos están en memoria).
 
 ### Evidencias de evaluación (recogida por equipo)
 
@@ -326,5 +334,9 @@ eso es el Topic 05. Límites que deben repetirse:
 - [ ] `02-first-routes.md` con `GET`/`POST` funcionando.
 - [ ] `03-crud-in-memory.md` con los cinco endpoints implementados.
 - [ ] `04-test-with-curl-bruno.md` con capturas de `200`, `201`, `404`.
+- [ ] Una colección de Bruno por equipo en `bruno/connectia/` (nueve
+      peticiones guardadas, cada una con su `Assert`). Revisar en el
+      repositorio que los ficheros están commiteados: una petición sin
+      guardar en Bruno no llega a disco.
 
 Consultar [`syllabus/README.md`](./syllabus/README.md).
