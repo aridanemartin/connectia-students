@@ -1,0 +1,102 @@
+# ============================================================================
+# EJEMPLO BÁSICO — API DE BIBLIOTECA (OpenAPI 3.1), SIN `components`
+# ============================================================================
+# Este es el PRIMER ejemplo del topic: todo va escrito "en su sitio", dentro
+# de cada operación. Es la API inventada de biblioteca; NO es tu contrato.
+#
+# Cuando lo entiendas, abre `openapi-components.yaml`: es ESTE MISMO contrato,
+# pero con lo reutilizable extraído a `components` y enlazado con `$ref`.
+#
+# Valídalo cuando quieras:
+#   npx @redocly/cli lint assets/openapi-basic.yaml --extends minimal
+# ============================================================================
+
+openapi: 3.1.0
+
+info:
+  # Obligatorios: nombre visible de la API y versión DEL CONTRATO (no de Node).
+  title: Biblioteca API — ejemplo básico
+  version: 1.0.0
+  description: |
+    Ejemplo mínimo. Sin `components`: cada operación define sus datos inline.
+
+servers:
+  # Dónde vive la API en cada entorno. En clase basta con localhost.
+  - url: http://localhost:3000
+    description: Entorno local de práctica
+
+paths:
+  # --------------------------------------------------------------------------
+  # RUTA DE COLECCIÓN: listar y crear libros.
+  # El verbo ("listar", "crear") NO va en la URL; lo aporta el método HTTP.
+  # --------------------------------------------------------------------------
+  /api/v1/books:
+    get:
+      summary: Listar libros
+      description: Devuelve la lista completa de libros.
+      responses:
+        # Cada código de estado es una clave ENTRE COMILLAS.
+        '200':
+          description: Lista de libros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # La forma del libro se escribe aquí mismo…
+                  type: object
+                  required: [id, title]
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    title:
+                      type: string
+
+    post:
+      summary: Crear un libro
+      requestBody:
+        # `required: true`: la operación no funciona sin cuerpo.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              # Esto RECHAZA claves desconocidas en la entrada.
+              additionalProperties: false
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                  maxLength: 120
+      responses:
+        # POST que CREA un recurso -> 201 Created (no 200).
+        '201':
+          description: Libro creado
+          content:
+            application/json:
+              schema:
+                # …y aquí se repite el mismo libro. Esa duplicación molesta es
+                # exactamente el problema que resuelve `components`.
+                type: object
+                required: [id, title]
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  title:
+                    type: string
+        '400':
+          description: La solicitud contiene datos no válidos.
+          content:
+            application/json:
+              schema:
+                # Forma de error del proyecto: un código y un mensaje.
+                type: object
+                required: [error, message]
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string

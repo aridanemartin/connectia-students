@@ -1,0 +1,42 @@
+# Peticiones contra el proyecto de referencia (code/backend, recurso `articles`).
+# Para vuestro backend, cambiad la ruta por /api/v1/admin/documents o
+# /api/v1/questions.
+@baseUrl = http://localhost:3000/api/v1
+
+### Lista con valores por defecto — 200
+GET {{baseUrl}}/articles
+
+### Lista paginada — 200
+GET {{baseUrl}}/articles?page=1&limit=1
+
+### Crear — 201
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+  "title": "Primer artículo",
+  "description": "Recurso de práctica."
+}
+
+### Crear sin título — 400
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{}
+
+### Body que no es JSON válido — 400
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{malo
+
+### Identificador válido que no existe — 404
+GET {{baseUrl}}/articles/99999999-9999-4999-8999-999999999999
+
+### Actualizar (usa el id que devolvió el POST) — 200
+PATCH {{baseUrl}}/articles/<id>
+Content-Type: application/json
+
+{
+  "title": "Título revisado"
+}

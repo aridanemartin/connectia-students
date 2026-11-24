@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Articles API — proyecto de referencia
+  version: 1.0.0
+  description: |
+    Contrato del recurso de práctica `articles` del proyecto de referencia
+    (Topics 04–07). Tiene la misma forma que el contrato de documentos de
+    Connectia, pero no es vuestro contrato: el vuestro describe `questions` y
+    `admin/documents`. Los datos viven solo en memoria.
+servers:
+  - url: http://localhost:3000
+    description: Entorno local de clase
+tags:
+  - name: Articles
+    description: Artículos de práctica, guardados en memoria.
+paths:
+  /api/v1/articles:
+    get:
+      tags: [Articles]
+      operationId: listArticles
+      summary: Listar artículos
+      description: Devuelve una página de artículos.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Página de artículos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      tags: [Articles]
+      operationId: createArticle
+      summary: Crear un artículo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateArticleRequest'
+            examples:
+              valid:
+                value:
+                  title: Primer artículo
+                  description: Un recurso de práctica.
+      responses:
+        '201':
+          description: Artículo creado en memoria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleEnvelope'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /api/v1/articles/{articleId}:
+    parameters:
+      - $ref: '#/components/parameters/ArticleId'
+    get:
+      tags: [Articles]
+      operationId: getArticle
+      summary: Consultar un artículo
+      responses:
+        '200':
+          description: Artículo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleEnvelope'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      tags: [Articles]
+      operationId: updateArticle
+      summary: Actualizar parte de un artículo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateArticleRequest'
+      responses:
+        '200':
+          description: Artículo actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleEnvelope'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  parameters:
+    ArticleId:
+      name: articleId
+      in: path
+      required: true
+      description: Identificador UUID de un artículo.
+      schema:
+        type: string
+        format: uuid
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Página solicitada; valor predeterminado 1.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Elementos por página; valor predeterminado 20.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  responses:
+    BadRequest:
+      description: El JSON está mal formado o uno o más datos no son válidos
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            invalidTitle:
+              value:
+                error: VALIDATION_ERROR
+                message: La solicitud contiene datos no válidos.
+                issues:
+                  - location: body
+                    path: [title]
+                    message: String must contain at least 1 character(s)
+            invalidJson:
+              value:
+                error: INVALID_JSON
+                message: Request body is not valid JSON
+    NotFound:
+      description: El identificador es válido, pero el recurso no existe
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            notFound:
+              value:
+                error: NOT_FOUND
+                message: Article with id '99999999-9999-4999-8999-999999999999' not found
+    InternalError:
+      description: Error inesperado, sin detalles internos en producción
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Article:
+      type: object
+      required: [id, title, description, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          minLength: 1
+          maxLength: 120
+        description:
+          type: string
+          maxLength: 500
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+    ArticleEnvelope:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/Article'
+    Pagination:
+      type: object
+      required: [page, limit, total]
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+        total:
+          type: integer
+          minimum: 0
+    ArticleListResponse:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Article'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CreateArticleRequest:
+      type: object
+      additionalProperties: false
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 120
+          pattern: \S
+        description:
+          type: string
+          maxLength: 500
+    UpdateArticleRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 120
+          pattern: \S
+        description:
+          type: string
+          maxLength: 500
+    ValidationIssue:
+      type: object
+      required: [location, path, message]
+      properties:
+        location:
+          type: string
+          enum: [body, params, query]
+        path:
+          type: array
+          description: Ruta del campo que falla, por ejemplo ["title"].
+          items:
+            type: [string, integer]
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+          enum: [VALIDATION_ERROR, INVALID_JSON, NOT_FOUND, INTERNAL_ERROR]
+        message:
+          type: string
+        issues:
+          type: array
+          description: Solo en errores de validación (Topic 07).
+          items:
+            $ref: '#/components/schemas/ValidationIssue'

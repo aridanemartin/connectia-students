@@ -1,0 +1,187 @@
+# ============================================================================
+# EJEMPLO CON `components` — API DE BIBLIOTECA (OpenAPI 3.1)
+# ============================================================================
+# Es el MISMO contrato que `openapi-basic.yaml`, pero con lo reutilizable
+# extraído a `components` y enlazado con `$ref`.
+#
+# ¿Para qué sirve `components`? Para describir una regla UNA sola vez. Si
+# cambia (por ejemplo, el máximo de `title`), se cambia en un sitio y todas
+# las operaciones quedan coherentes. Es la diferencia entre escribir el libro
+# tres veces (básico) y escribirlo una (aquí).
+#
+# Valídalo cuando quieras:
+#   npx @redocly/cli lint assets/openapi-components.yaml --extends minimal
+# ============================================================================
+
+openapi: 3.1.0
+
+info:
+  title: Biblioteca API — ejemplo con components
+  version: 1.0.0
+  description: |
+    El mismo contrato que el ejemplo básico, factorizado con `components`.
+
+servers:
+  - url: http://localhost:3000
+    description: Entorno local de práctica
+
+paths:
+  # --------------------------------------------------------------------------
+  # RUTA DE COLECCIÓN
+  # --------------------------------------------------------------------------
+  /api/v1/books:
+    get:
+      summary: Listar libros
+      parameters:
+        # Parámetro reutilizable: definido una vez en `components.parameters`.
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: Lista de libros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  # En vez de repetir la forma del libro, la referenciamos.
+                  $ref: '#/components/schemas/Book'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      summary: Crear un libro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookRequest'
+      responses:
+        '201':
+          description: Libro creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  # --------------------------------------------------------------------------
+  # RUTA DE ELEMENTO: un libro concreto por su id.
+  # El parámetro de path se declara UNA vez a nivel de ruta y lo heredan todos
+  # los métodos.
+  # --------------------------------------------------------------------------
+  /api/v1/books/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/BookId'
+    get:
+      summary: Consultar un libro
+      responses:
+        '200':
+          description: Libro encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+# ============================================================================
+# COMPONENTS: todo lo reutilizable. Cada `$ref` de arriba apunta aquí.
+# Tres bloques habituales: parameters, responses y schemas.
+# ============================================================================
+components:
+  parameters:
+    BookId:
+      name: bookId
+      in: path
+      required: true        # un parámetro de path SIEMPRE es obligatorio
+      description: Identificador del libro (UUID).
+      schema:
+        type: string
+        format: uuid
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Número de página (empieza en 1).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+  responses:
+    # Respuestas completas reutilizables: traen su descripción y su content.
+    BadRequest:
+      description: La solicitud contiene datos no válidos.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: El identificador es válido, pero el recurso no existe.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Error inesperado, sin detalles internos.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    # --- Recurso principal --------------------------------------------------
+    Book:
+      type: object
+      description: Un libro del catálogo.
+      # `required` lista las claves que SIEMPRE aparecen en la respuesta.
+      required: [id, title, available, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true      # el cliente lo recibe, pero no lo envía
+        title:
+          type: string
+          minLength: 1
+          maxLength: 120
+          pattern: \S         # exige al menos un carácter que no sea espacio
+        available:
+          type: boolean
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    # --- Cuerpo de entrada --------------------------------------------------
+    CreateBookRequest:
+      type: object
+      description: Datos para crear un libro (el id y la fecha los genera el servidor).
+      required: [title]
+      additionalProperties: false   # rechaza campos desconocidos en la ENTRADA
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 120
+          pattern: \S
+
+    # --- Error común --------------------------------------------------------
+    # La misma forma de error para cualquier código de estado.
+    ErrorResponse:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+          # `enum` limita los valores posibles a una lista cerrada.
+          enum: [VALIDATION_ERROR, INVALID_JSON, NOT_FOUND, INTERNAL_ERROR]
+        message:
+          type: string
